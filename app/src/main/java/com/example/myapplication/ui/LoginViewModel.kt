@@ -17,6 +17,9 @@ class LoginViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _resetResult = MutableLiveData<String?>()
+    val resetResult: LiveData<String?> = _resetResult
+
     fun login(email: String, password: String) {
         _isLoading.value = true
         
@@ -41,6 +44,28 @@ class LoginViewModel : ViewModel() {
             } finally {
                 _isLoading.postValue(false)
             }
+        }
+    }
+
+    fun resetPassword(email: String) {
+        _isLoading.value = true
+        viewModelScope.launch {
+            // Mocking for Demo
+            if (email == "asif.test@example.com") {
+                _resetResult.postValue("Reset link sent to your email!")
+            } else {
+                try {
+                    val response = RetrofitClient.instance.resetPassword(mapOf("email" to email))
+                    if (response.isSuccessful) {
+                        _resetResult.postValue(response.body()?.message)
+                    } else {
+                        _resetResult.postValue("Email not found")
+                    }
+                } catch (e: Exception) {
+                    _resetResult.postValue("Network Error: ${e.message}")
+                }
+            }
+            _isLoading.postValue(false)
         }
     }
 }
