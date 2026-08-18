@@ -14,7 +14,14 @@ data class LoginResponse(
     val error: String?
 )
 
+data class ResetResponse(
+    val message: String?
+)
+
 interface ApiService {
     @POST("api/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+
+    @POST("api/reset")
+    suspend fun resetPassword(@Body email: Map<String, String>): Response<ResetResponse>
 }

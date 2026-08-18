@@ -25,6 +25,10 @@
             android:name=".MainActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.ForgotPasswordActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

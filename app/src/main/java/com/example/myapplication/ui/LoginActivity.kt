@@ -41,6 +41,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.tvForgotPassword.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        }
+
         observeViewModel()
     }
 
