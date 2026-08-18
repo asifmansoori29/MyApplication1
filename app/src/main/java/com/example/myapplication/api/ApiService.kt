@@ -1,22 +1,11 @@
 package com.example.myapplication.api
 
+import com.example.myapplication.models.LoginRequest
+import com.example.myapplication.models.LoginResponse
+import com.example.myapplication.models.ResetResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
-
-data class LoginRequest(
-    val email: String,
-    val password: String
-)
-
-data class LoginResponse(
-    val token: String?,
-    val error: String?
-)
-
-data class ResetResponse(
-    val message: String?
-)
 
 interface ApiService {
     @POST("api/login")

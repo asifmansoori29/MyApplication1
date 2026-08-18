@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.api.LoginRequest
-import com.example.myapplication.api.LoginResponse
 import com.example.myapplication.api.RetrofitClient
+import com.example.myapplication.models.LoginRequest
+import com.example.myapplication.models.LoginResponse
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
