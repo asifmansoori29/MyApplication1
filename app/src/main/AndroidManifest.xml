@@ -44,6 +44,10 @@
             android:name=".ui.SignupActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.EditProfileActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
