@@ -50,6 +50,7 @@ dependencies {
     // Lifecycle (ViewModel & LiveData)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     
     // Security (for Session Management)
     implementation(libs.androidx.security.crypto)
@@ -65,6 +66,9 @@ dependencies {
 
     // Lottie Animations
     implementation(libs.lottie)
+    
+    // Grid Layout
+    implementation(libs.androidx.gridlayout)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
