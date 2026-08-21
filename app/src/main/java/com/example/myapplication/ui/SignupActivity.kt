@@ -1,6 +1,7 @@
 package com.example.myapplication.ui
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,21 @@ class SignupActivity : AppCompatActivity() {
 
         binding.tvBackToLogin.setOnClickListener {
             finish()
+        }
+
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.isLoading.observe(this) { isLoading ->
+            binding.lottieAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.btnSignup.isEnabled = !isLoading
+            
+            if (isLoading) {
+                binding.ivLogo.visibility = View.GONE
+            } else {
+                binding.ivLogo.visibility = View.VISIBLE
+            }
         }
 
         viewModel.signupResult.observe(this) { message ->

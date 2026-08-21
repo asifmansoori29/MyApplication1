@@ -63,6 +63,9 @@ dependencies {
     // Biometric
     implementation(libs.androidx.biometric)
 
+    // Lottie Animations
+    implementation(libs.lottie)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)

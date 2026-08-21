@@ -133,7 +133,14 @@ class LoginActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.lottieAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
             binding.btnLogin.isEnabled = !isLoading
+            
+            if (isLoading) {
+                binding.ivLogo.visibility = View.GONE
+            } else {
+                binding.ivLogo.visibility = View.VISIBLE
+            }
         }
 
         viewModel.loginResult.observe(this) { response ->
