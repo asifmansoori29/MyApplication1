@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +28,10 @@
 
         <activity
             android:name=".ui.ForgotPasswordActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.SignupActivity"
             android:exported="false" />
 
     </application>
