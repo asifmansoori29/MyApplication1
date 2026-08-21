@@ -14,10 +14,9 @@
         android:padding="32dp">
 
         <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="200dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="40dp"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:src="@drawable/cdc_logo"
             android:contentDescription="CDC Logo" />
@@ -25,16 +24,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Central Depository Company"
+            android:text="Create Account"
             android:textColor="#003366"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome Back! Please login to continue"
+            android:text="Join Central Depository Company today"
             android:textColor="#666666"
             android:textSize="14sp"
             android:layout_marginBottom="40dp"/>
@@ -43,9 +42,24 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="User ID / Email"
+            android:hint="Full Name"
             android:layout_marginBottom="16dp"
             app:startIconDrawable="@android:drawable/ic_menu_edit">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Address"
+            android:layout_marginBottom="16dp"
+            app:startIconDrawable="@android:drawable/ic_dialog_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
@@ -59,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="24dp"
             app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
             app:passwordToggleEnabled="true">
 
@@ -70,53 +84,21 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Forgot Password?"
-            android:textColor="#003366"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="32dp"
-            android:clickable="true"
-            android:focusable="true" />
-
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignup"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="LOGIN"
+            android:text="SIGN UP"
             android:textSize="16sp"
             android:textStyle="bold"
             android:backgroundTint="#003366"
             app:cornerRadius="8dp" />
 
-        <ImageButton
-            android:id="@+id/btnBiometric"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_fingerprint"
-            android:contentDescription="Biometric Login"
-            app:tint="#003366"
-            android:scaleType="fitCenter"
-            android:padding="8dp"/>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginTop="16dp" />
-
         <TextView
-            android:id="@+id/tvSignup"
+            android:id="@+id/tvBackToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? Sign Up"
+            android:text="Already have an account? Login"
             android:textColor="#003366"
             android:textSize="14sp"
             android:textStyle="bold"
