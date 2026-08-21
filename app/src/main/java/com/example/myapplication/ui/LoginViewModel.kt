@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.api.RetrofitClient
-import com.example.myapplication.models.LoginRequest
 import com.example.myapplication.models.LoginResponse
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class LoginViewModel : ViewModel() {
+
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _loginResult = MutableLiveData<LoginResponse?>()
     val loginResult: LiveData<LoginResponse?> = _loginResult
@@ -20,27 +22,39 @@ class LoginViewModel : ViewModel() {
     private val _resetResult = MutableLiveData<String?>()
     val resetResult: LiveData<String?> = _resetResult
 
+    private val _signupResult = MutableLiveData<String?>()
+    val signupResult: LiveData<String?> = _signupResult
+
     fun login(email: String, password: String) {
         _isLoading.value = true
-        
-        // Demo Check: ReqRes API kabhi kabhi unstable hoti hai, 
-        // isliye humne ye demo credentials ka direct check rakha hai.
-        if (email == "eve.holt@reqres.in" && password == "cityslicka") {
-            _loginResult.postValue(LoginResponse("QpwL5tke4Pnpja7X4", null))
-            _isLoading.value = false
-            return
-        }
-
         viewModelScope.launch {
             try {
-                val response = RetrofitClient.instance.login(LoginRequest(email, password))
-                if (response.isSuccessful) {
-                    _loginResult.postValue(response.body())
+                val result = auth.signInWithEmailAndPassword(email, password).await()
+                if (result.user != null) {
+                    _loginResult.postValue(LoginResponse("firebase_token", null))
                 } else {
-                    _loginResult.postValue(LoginResponse(null, "Invalid Credentials"))
+                    _loginResult.postValue(LoginResponse(null, "Login Failed"))
                 }
             } catch (e: Exception) {
-                _loginResult.postValue(LoginResponse(null, "Network Error: ${e.message}"))
+                _loginResult.postValue(LoginResponse(null, e.message ?: "Error Occurred"))
+            } finally {
+                _isLoading.postValue(false)
+            }
+        }
+    }
+
+    fun signup(email: String, password: String) {
+        _isLoading.value = true
+        viewModelScope.launch {
+            try {
+                val result = auth.createUserWithEmailAndPassword(email, password).await()
+                if (result.user != null) {
+                    _signupResult.postValue("Account Created Successfully")
+                } else {
+                    _signupResult.postValue("Signup Failed")
+                }
+            } catch (e: Exception) {
+                _signupResult.postValue(e.message ?: "Error Occurred")
             } finally {
                 _isLoading.postValue(false)
             }
@@ -50,22 +64,14 @@ class LoginViewModel : ViewModel() {
     fun resetPassword(email: String) {
         _isLoading.value = true
         viewModelScope.launch {
-            // Mocking for Demo
-            if (email == "asif.test@example.com") {
+            try {
+                auth.sendPasswordResetEmail(email).await()
                 _resetResult.postValue("Reset link sent to your email!")
-            } else {
-                try {
-                    val response = RetrofitClient.instance.resetPassword(mapOf("email" to email))
-                    if (response.isSuccessful) {
-                        _resetResult.postValue(response.body()?.message)
-                    } else {
-                        _resetResult.postValue("Email not found")
-                    }
-                } catch (e: Exception) {
-                    _resetResult.postValue("Network Error: ${e.message}")
-                }
+            } catch (e: Exception) {
+                _resetResult.postValue(e.message ?: "Error Occurred")
+            } finally {
+                _isLoading.postValue(false)
             }
-            _isLoading.postValue(false)
         }
     }
 }
