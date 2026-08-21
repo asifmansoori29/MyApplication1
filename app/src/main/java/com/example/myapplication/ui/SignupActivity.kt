@@ -17,11 +17,12 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSignup.setOnClickListener {
+            val name = binding.etName.text.toString()
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.signup(email, password)
+            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
+                viewModel.signup(email, password, name)
             } else {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
